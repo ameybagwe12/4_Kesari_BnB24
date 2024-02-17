@@ -9,9 +9,16 @@ import Typography from "@mui/material/Typography";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
+import ReactPlayer from "react-player";
+import PauseIcon from "@mui/icons-material/Pause";
 
 export default function MediaControlCard() {
   const theme = useTheme();
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
+  const handleTogglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
 
   return (
     <>
@@ -44,8 +51,12 @@ export default function MediaControlCard() {
                   <SkipPreviousIcon />
                 )}
               </IconButton>
-              <IconButton aria-label="play/pause">
-                <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+              <IconButton aria-label="play/pause" onClick={handleTogglePlay}>
+                {isPlaying ? (
+                  <PauseIcon sx={{ height: 38, width: 38 }} />
+                ) : (
+                  <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+                )}
               </IconButton>
               <IconButton aria-label="next">
                 {theme.direction === "rtl" ? (
@@ -56,6 +67,14 @@ export default function MediaControlCard() {
               </IconButton>
             </Box>
           </Box>
+          <ReactPlayer
+            url={require("../my_audio.mp3")}
+            playing={isPlaying}
+            height="0"
+            width="0"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+          />
           <CardMedia
             component="img"
             sx={{ width: 151 }}

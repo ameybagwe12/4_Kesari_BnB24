@@ -94,27 +94,43 @@ function App() {
 
   return (
     <div className="App">
-        <BrowserRouter>
-          <Navbar connectedAccount={connectedAccount} player={player}/>
-          {player && (
-            <Player
-              nft={currentNft}
-              setPlayer={setPlayer}
-              setCurrentNft={setCurrentNft}
-            />
-          )}
-          <div>
-            <Routes>
-              <Route index element={<Home nfts={nfts} handlePayment={handlePayment} player={player}/>} />
-              {!player && (
-                <Route
-                  path="/mintNFT"
-                  element={<MintNFT nfts={nfts} setNfts={setNfts} connectedAccount={connectedAccount}/>}
+      <BrowserRouter>
+        <Navbar connectedAccount={connectedAccount} player={player} />
+        {player && (
+          <Player
+            nft={currentNft}
+            setPlayer={setPlayer}
+            setCurrentNft={setCurrentNft}
+          />
+        )}
+        <div>
+          <Routes>
+            <Route
+              index
+              element={
+                <Home
+                  nfts={nfts}
+                  handlePayment={handlePayment}
+                  player={player}
                 />
-              )}
-            </Routes>
-          </div>
-        </BrowserRouter>
+              }
+            />
+            {!player && (
+              <Route
+                path="/mintNFT"
+                element={
+                  <MintNFT
+                    nfts={nfts}
+                    setNfts={setNfts}
+                    connectedAccount={connectedAccount}
+                  />
+                }
+              />
+            )}
+            <Route path="/songTab" element={<SongTab />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
