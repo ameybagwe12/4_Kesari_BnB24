@@ -15,12 +15,13 @@ function Card({ nft, handlePayment, player }) {
         //     </div>
         // </div>
         <div className="card">
-            <img src={require(`../thumbnails/${nft.thumbnail}`)} class="card-img-top" alt={nft.nftName}/>
+            <img src={nft.thumUrl} class="card-img-top" alt={nft.nftName}/>
             <div class="card-body">
                 <h5 class="card-title">{nft.nftName}</h5>
                 <p class="card-text">{nft.nftDescription}</p>
                 <p class="card-text">Price: {nft.nftPrice} BFT</p>
-                {!player && (nft.mediaType === "audio" ? <button onClick={() => { console.log("hear me"); handlePayment(nft) }} className='btn btn-primary'>Hear Audio</button> : <button onClick={() => { console.log("watch me"); handlePayment(nft) }} className='btn btn-primary'>Watch video</button>)}
+                {!player && <button onClick={() => { console.log("hear me"); handlePayment(nft) }} className='btn btn-primary'>Hear Audio</button>}
+                {/* {!player && (nft.mediaType === "audio" ? <button onClick={() => { console.log("hear me"); handlePayment(nft) }} className='btn btn-primary'>Hear Audio</button> : <button onClick={() => { console.log("watch me"); handlePayment(nft) }} className='btn btn-primary'>Watch video</button>)} */}
             </div>
         </div>
     )

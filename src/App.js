@@ -110,7 +110,7 @@ function App() {
               {!player && (
                 <Route
                   path="/mintNFT"
-                  element={<MintNFT nfts={nfts} setNfts={setNfts} />}
+                  element={<MintNFT nfts={nfts} setNfts={setNfts} connectedAccount={connectedAccount}/>}
                 />
               )}
             </Routes>
