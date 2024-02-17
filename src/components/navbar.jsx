@@ -30,12 +30,12 @@ function Navbar({ player }) {
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
                 <NavLink to="/" style={{ textDecoration: 'none' }}>
-                    <h1 className='text-body-secondary'>NFT-Marketplace</h1>
+                    <h1 className='text-body-secondary'>Spoti.Fi</h1>
                 </NavLink>
                 <form class="d-flex" role="search">
                 {!connected && <button class="btn btn-success m-2" type="button" onClick={connectWallet}>Connect wallet</button>}
                     {!player && <NavLink to="mintNFT">
-                        <button class="btn btn-info m-2" type="button" >Mint NFT</button>
+                        <button class="btn btn-info m-2" type="button" >Publish your song</button>
                     </NavLink>}
                 </form>
             </div>
