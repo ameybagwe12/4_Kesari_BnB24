@@ -1,22 +1,16 @@
-import React from "react";
-import axios from "axios";
-import { useState } from "react";
-import db, { storage } from "../firebase.js";
-import key from "../key.json";
-import { useEffect } from "react";
-import "./mintNFT.css";
-
-import {
-  getDownloadURL,
-  ref as storageRef,
-  uploadBytes,
-} from "firebase/storage";
+import React from 'react'
+import axios from 'axios';
+import { useState } from 'react';
+import db,{storage} from '../firebase.js'
+import key from '../key.json'
+import { useEffect } from 'react';
+import './mintNFT.css';
 
 function MintNFT({ nfts, setNfts, connectedAccount }) {
-  var url1;
-  const [nftFile, setNftFile] = useState("");
-  const [nftThumbnail, setNftThumbnail] = useState("");
-  const [songId, setSongId] = useState(1);
+
+    const [nftFile, setNftFile] = useState('');
+    const [nftThumbnail, setNftThumbnail] = useState('');
+    const [songId, setSongId] = useState(1);
 
   useEffect(() => {
     console.log(nfts);
@@ -40,45 +34,25 @@ function MintNFT({ nfts, setNfts, connectedAccount }) {
     // console.log(thumbnail);
   }, [nftFile, nftThumbnail]);
 
-  const handleUpload = async (e) => {
-    const nftName = document.getElementById("nft-name").value;
-    const nftDescription = document.getElementById("nft-description").value;
-    const nftId = songId;
-    const imageFile = document.getElementById("nft-image").files[0];
-    const imageRef = storageRef(storage, `img/}`);
-    uploadBytes(imageRef, imageFile)
-      .then((snapshot) => {
-        getDownloadURL(snapshot.ref)
-          .then((url) => {
-            console.log(url);
-            url1 = url;
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setSongId(songId + 1);
-    if (!(nftName && nftDescription && nftThumbnail && nftFile)) {
-      alert("Fill all the fields");
-      return;
-    }
-    if (
-      !(
-        nftFile.type.startsWith("audio/") &&
-        nftThumbnail.type.startsWith("image/")
-      )
-    ) {
-      alert("Check the uploaded file types");
-      return;
-    }
-    console.log("Uploading to IPFS...");
-    e.preventDefault();
-    try {
-      const fileData = new FormData();
-      fileData.append("file", nftFile);
+    const handleUpload = async (e) => {
+        const nftName = document.getElementById('nft-name').value;
+        const nftDescription = document.getElementById('nft-description').value;
+        const nftId = songId;
+   
+        setSongId(songId+1);
+        if(!(nftName && nftDescription &&  nftThumbnail && nftFile)) {
+            alert("Fill all the fields")
+            return;
+        }
+        if(!(nftFile.type.startsWith('audio/') && nftThumbnail.type.startsWith('image/'))){
+            alert("Check the uploaded file types");
+            return;
+        }
+        console.log("Uploading to IPFS...");
+        e.preventDefault();
+        try {
+            const fileData = new FormData();
+            fileData.append("file", nftFile);
 
       const fileThumbnail = new FormData();
       fileThumbnail.append("file", nftThumbnail);
@@ -116,114 +90,64 @@ function MintNFT({ nfts, setNfts, connectedAccount }) {
         thum.data.IpfsHash;
       const nftOwner = connectedAccount;
 
-      const newNFT = {
-        nftId,
-        nftName,
-        nftDescription,
-        thumUrl,
-        nftUrl,
-        nftOwner,
-      };
-      setNfts([...nfts, newNFT]);
-      console.log("NFTS: ", nfts);
-      db.collection("music")
-        .add({
-          nftDescription: nftDescription,
-          nftName: nftName,
-          nftUrl: nftUrl,
-          nftOwner: nftOwner,
-          thumbnailUrl: url1,
-        })
-        .then((docRef) => {
-          console.log("Document written with ID: ", docRef.id);
-        })
-        .catch((error) => {
-          console.error("Error adding document: ", error);
-        });
-    } catch (error) {
-      console.log(error);
+            const newNFT = { nftId, nftName, nftDescription, thumUrl, nftUrl, nftOwner }
+            setNfts([...nfts, newNFT])
+            console.log("NFTS: ", nfts);
+            db.collection('music').add({"nftDescription":nftDescription,
+            "nftName":nftName,"nftUrl":nftUrl,"nftOwner":nftOwner,
+            "thumbnailUrl":thumUrl," nftId":nftId  })
+            .then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+    
+            
+
+        } catch (error) {
+            console.log(error);
+        }
     }
-  };
 
   return (
-    <div style={{ backgroundColor: "#900C3F", width: "100%", height: "100%" }}>
-      <div className="mintForm">
-        <div class="row justify-content-center mintForm-l ">
-          <div class="col-sm-8 col-lg-6 col-xl-4 border border-5 rounded shadow p-3 mintForm-l2 mt-5">
-            <h3 class="fw-bolder text-center">Publish Your Song</h3>
-            <hr />
-            <div class="m-2">
-              <label htmlFor="nft-name" class="form-label fw-bold text-primary">
-                Song name
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="nft-name"
-                placeholder="Autumn Scene"
-              />
+    <div>
+            <div className="mintForm">
+                <div class="row justify-content-center mintForm-l">
+                    <div class="col-sm-8 col-lg-6 col-xl-4 border border-5 rounded shadow p-3 mintForm-l2">
+                        <h3 class="fw-bolder text-center">Publish Your Song</h3>
+                        <hr />
+                        <div class="m-2">
+                            <label htmlFor="nft-name" class="form-label fw-bold text-primary">
+                                Song name
+                            </label>
+                            <input type="text" class="form-control" id="nft-name" placeholder="Autumn Scene"
+                            />
+                        </div>
+                        <div class="m-2 mt-3">
+                            <label htmlFor="nft-description" class="form-label fw-bold text-primary">Song Description</label>
+                            <textarea class="form-control" id="nft-description" rows="3" placeholder="#soothing #nature #autumn"></textarea>
+                        </div>
+                        <div className='m-2 mt-3'>
+                            <label htmlFor="nft-thumbnail" class="form-label fw-bold text-primary">
+                                Upload Song thumbnail image
+                            </label>
+                            <input class="form-control" type="file" id="nft-thumbnail" accept="image/*" onChange={(e) => { setNftThumbnail(e.target.files[0]) }} />
+                        </div>
+                        <div className='m-2 mt-3'>
+                            <label htmlFor="nft-file" class="form-label fw-bold text-primary">
+                                Upload Song file (.mp3)
+                            </label>
+                            <input class="form-control" type="file" id="nft-file" accept="audio/*" onChange={(e) => { setNftFile(e.target.files[0]) }} />
+                        </div>
+                        <div class="mt-4 mb-3">
+                            <button class="btn btn-primary mt-3 shadow" type="submit" id="mint-nft" onClick={handleUpload}> Mint my NFT </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="m-2 mt-3">
-              <label
-                htmlFor="nft-description"
-                class="form-label fw-bold text-primary"
-              >
-                Song Description
-              </label>
-              <textarea
-                class="form-control"
-                id="nft-description"
-                rows="3"
-                placeholder="#soothing #nature #autumn"
-              ></textarea>
-            </div>
-            <div className="m-2 mt-3">
-              <label
-                htmlFor="nft-image"
-                class="form-label fw-bold text-primary"
-              >
-                Upload thumbnail
-              </label>
-              <input
-                class="form-control"
-                type="file"
-                accept="image/*"
-                id="nft-image"
-                onChange={(e) => {
-                  setNftThumbnail(e.target.files[0]);
-                }}
-              />
-            </div>
-            <div className="m-2 mt-3">
-              <label htmlFor="nft-file" class="form-label fw-bold text-primary">
-                Upload Song file (.mp3)
-              </label>
-              <input
-                class="form-control"
-                type="file"
-                id="nft-file"
-                accept="audio/*"
-                onChange={(e) => {
-                  setNftFile(e.target.files[0]);
-                }}
-              />
-            </div>
-            <div class="mt-4 mb-3">
-              <button
-                class="btn btn-primary mt-3 shadow"
-                type="submit"
-                id="mint-nft"
-                onClick={handleUpload}
-              >
-                {" "}
-                Mint my NFT{" "}
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+  )
 }
 
 export default MintNFT;
