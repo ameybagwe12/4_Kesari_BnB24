@@ -8,18 +8,17 @@ import Player from "./components/player";
 import Home from "./pages/home";
 import MintNFT from "./pages/mintNFT";
 import contractData from "./contract.json";
-
+import SongTab from "./pages/song-tab";
 
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [connectedAccount, setConnectedAccount] = useState(null);
   const [nfts, setNfts] = useState([]);
-  const [currentNft, setCurrentNft] = useState(null)
+  const [currentNft, setCurrentNft] = useState(null);
   const [player, setPlayer] = useState(false);
   useEffect(() => {
     console.log("Account: ", connectedAccount);
   }, [connectedAccount]);
-  
 
   useEffect(() => {
     async function connectToMetaMask() {
@@ -54,7 +53,7 @@ function App() {
     netId = parseInt(netId, 10);
     console.log(`network id : ${netId}`);
     // console.log(typeof(netId));
-    if(netId !== 355113){
+    if (netId !== 355113) {
       alert("Please change network to Bitfinity");
       return;
     }
@@ -91,31 +90,42 @@ function App() {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   return (
     <div className="App">
-        <BrowserRouter>
-          <Navbar connectedAccount={connectedAccount} player={player}/>
-          {player && (
-            <Player
-              nft={currentNft}
-              setPlayer={setPlayer}
-              setCurrentNft={setCurrentNft}
-            />
-          )}
-          <div>
-            <Routes>
-              <Route index element={<Home nfts={nfts} handlePayment={handlePayment} player={player}/>} />
-              {!player && (
-                <Route
-                  path="/mintNFT"
-                  element={<MintNFT nfts={nfts} setNfts={setNfts} />}
+      <BrowserRouter>
+        <Navbar connectedAccount={connectedAccount} player={player} />
+        {player && (
+          <Player
+            nft={currentNft}
+            setPlayer={setPlayer}
+            setCurrentNft={setCurrentNft}
+          />
+        )}
+        <div>
+          <Routes>
+            <Route
+              index
+              element={
+                <Home
+                  nfts={nfts}
+                  handlePayment={handlePayment}
+                  player={player}
                 />
-              )}
-            </Routes>
-          </div>
-        </BrowserRouter>
+              }
+            />
+
+            {!player && (
+              <Route
+                path="/mintNFT"
+                element={<MintNFT nfts={nfts} setNfts={setNfts} />}
+              />
+            )}
+            <Route path="/songTab" element={<SongTab />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
