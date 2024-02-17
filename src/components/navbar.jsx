@@ -28,6 +28,23 @@ function Navbar({ player }) {
   return (
     <nav style={{ backgroundColor: "#581845", height: 100 }} class="navbar ">
       <div class="container-fluid">
+        <NavLink to="/" style={{ textDecoration: "none" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h1
+              style={{
+                color: "white",
+              }}
+            >
+              Spoti.Fi
+            </h1>
+          </div>
+        </NavLink>
         <p class="d-inline-flex gap-1">
           <a
             style={{ color: "#DAF7A6" }}
@@ -38,29 +55,14 @@ function Navbar({ player }) {
             aria-expanded="false"
             aria-controls="collapseExample"
           >
-            Connect Your Account
+            Connected Account :{" "}
+            {connectedAccount && (
+              <div class="collapse" id="collapseExample">
+                <p color="#DAF7A6">{connectedAccount}</p>
+              </div>
+            )}
           </a>
         </p>
-        {connectedAccount && (
-          <div class="collapse" id="collapseExample">
-            <div style={{ color: "white" }} class="card card-body">
-              {connectedAccount}
-            </div>
-          </div>
-        )}
-
-        <NavLink to="/" style={{ textDecoration: "none" }}>
-          <h1
-            style={{
-              color: "white",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            Spoti.Fi
-          </h1>
-        </NavLink>
 
         <form class="d-flex" role="search">
           {!connected && (
