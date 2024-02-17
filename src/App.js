@@ -3,9 +3,8 @@ import "./App.css";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import Web3 from "web3";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar";
-import Player from "./components/player";
 import Home from "./pages/home";
 import MintNFT from "./pages/mintNFT";
 import contractData from "./contract.json";
@@ -17,9 +16,6 @@ function App() {
   const [nfts, setNfts] = useState([]);
   const [currentNft, setCurrentNft] = useState(null);
   const [player, setPlayer] = useState(false);
-  useEffect(() => {
-    console.log("Account: ", connectedAccount);
-  }, [connectedAccount]);
 
   const [nfts1, setNfts1] = useState([]);
 
@@ -65,14 +61,12 @@ function App() {
     var netId = await web3.eth.net.getId(); // Ensure network is loaded
     netId = parseInt(netId, 10);
     console.log(`network id : ${netId}`);
-    // console.log(typeof(netId));
     if (netId !== 355113) {
       alert("Please change network to Bitfinity");
       return;
     }
     try {
       if (window.ethereum) {
-        // const web3 = new Web3(window.ethereum);
         await window.ethereum.request({ method: "eth_requestAccounts" });
         console.log("Wallet connected");
         const accounts = await web3.eth.getAccounts();
@@ -96,8 +90,6 @@ function App() {
       console.log("Transaction sent.\n Hash: ", trxnHash);
       alert("Transaction successful!");
       console.log(nft);
-      let currNft = nft;
-      console.log("Curr nft: ", currNft);
       setCurrentNft(nft);
       setPlayer(true);
     } catch (e) {
@@ -106,46 +98,39 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <BrowserRouter>
+    <>
+    <Router>
+      <div className="App">
         <Navbar connectedAccount={connectedAccount} player={player} />
         {player && (
-          <Player
-            nft={currentNft}
-            setPlayer={setPlayer}
-            setCurrentNft={setCurrentNft}
-          />
+          <SongTab nft={currentNft} setPlayer={setPlayer} className='m-4'/>
         )}
-        <div>
-          <Routes>
-            <Route
-              index
-              element={
-                <Home
-                  nfts={nfts}
-                  nfts1={nfts1}
-                  handlePayment={handlePayment}
-                  player={player}
-                />
-              }
-            />
-            {!player && (
-              <Route
-                path="/mintNFT"
-                element={
-                  <MintNFT
-                    nfts={nfts}
-                    setNfts={setNfts}
-                    connectedAccount={connectedAccount}
-                  />
-                }
+        <Routes>
+          <Route
+            index
+            element={
+              <Home
+                nfts={nfts}
+                handlePayment={handlePayment}
+                player={player}
               />
-            )}
-            <Route path="/songTab" element={<SongTab />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
+            }
+          />
+          <Route
+            path="/mintNFT"
+            element={
+              <MintNFT
+                nfts={nfts}
+                setNfts={setNfts}
+                connectedAccount={connectedAccount}
+              />
+            }
+          />
+        
+        </Routes>
+      </div>
+    </Router>
+    </>
   );
 }
 
