@@ -1,0 +1,23 @@
+/* .card-body {
+    width: 600px;
+    height: auto;
+} */
+.card{
+    width: 200px;
+    margin: 10px;
+    /* box-shadow:  3px 10px rgba(0, 0, 0, 0.2); */
+    box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.15),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(0.95);
+  }
+/* 
+.audio-card {
+    height: 300px;
+} */
