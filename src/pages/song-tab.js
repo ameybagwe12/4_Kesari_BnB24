@@ -12,9 +12,10 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import ReactPlayer from "react-player";
 import PauseIcon from "@mui/icons-material/Pause";
 
-export default function MediaControlCard() {
+export default function SongTab({ nft, setPlayer }) {
   const theme = useTheme();
   const [isPlaying, setIsPlaying] = React.useState(false);
+  console.log("nft in songtab", nft);
 
   const handleTogglePlay = () => {
     setIsPlaying(!isPlaying);
@@ -68,8 +69,7 @@ export default function MediaControlCard() {
             </Box>
           </Box>
           <ReactPlayer
-            url={require("../my_audio.mp3")}
-            controls
+            url={nft.nftUrl}
             playing={isPlaying}
             height="0"
             width="0"
@@ -79,7 +79,7 @@ export default function MediaControlCard() {
           <CardMedia
             component="img"
             sx={{ width: 151 }}
-            src={require("../my_image.jpeg")}
+            src={nft.thumUrl}
             alt="Live from space album cover"
           />
         </Card>

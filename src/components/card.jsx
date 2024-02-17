@@ -20,7 +20,7 @@ function Card({ nft, handlePayment, player }) {
                 <h5 class="card-title">{nft.nftName}</h5>
                 <p class="card-text">{nft.nftDescription}</p>
                 <p class="card-text">Price: {nft.nftPrice} BFT</p>
-                {!player && <button onClick={() => { console.log("hear me"); handlePayment(nft) }} className='btn btn-primary'>Hear Audio</button>}
+                {!player && <button onClick={() => { console.log("hear me"); handlePayment(nft) }} className='btn btn-primary'>Play</button>}
                 {/* {!player && (nft.mediaType === "audio" ? <button onClick={() => { console.log("hear me"); handlePayment(nft) }} className='btn btn-primary'>Hear Audio</button> : <button onClick={() => { console.log("watch me"); handlePayment(nft) }} className='btn btn-primary'>Watch video</button>)} */}
             </div>
         </div>
