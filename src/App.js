@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 import Web3 from "web3";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar";
@@ -19,6 +20,18 @@ function App() {
   useEffect(() => {
     console.log("Account: ", connectedAccount);
   }, [connectedAccount]);
+
+  const [nfts1, setNfts1] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const db = firebase.firestore();
+      const data = await db.collection("music").get();
+      setNfts1(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+      console.log(nfts1)
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     async function connectToMetaMask() {
@@ -110,6 +123,7 @@ function App() {
               element={
                 <Home
                   nfts={nfts}
+                  nfts1={nfts1}
                   handlePayment={handlePayment}
                   player={player}
                 />
