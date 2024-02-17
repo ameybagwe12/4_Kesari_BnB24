@@ -69,6 +69,7 @@ export default function MediaControlCard() {
           </Box>
           <ReactPlayer
             url={require("../my_audio.mp3")}
+            controls
             playing={isPlaying}
             height="0"
             width="0"
