@@ -111,6 +111,7 @@ function App() {
             element={
               <Home
                 nfts={nfts}
+                nfts1 = {nfts1 }
                 handlePayment={handlePayment}
                 player={player}
               />

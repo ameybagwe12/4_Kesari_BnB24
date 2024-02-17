@@ -7,7 +7,7 @@ function Home({ nfts,nfts1, handlePayment, player }) {
   return (
     <div className='home'>
       <div className="nft-list">
-        {nfts1.length ? (nfts1.map(
+        {nfts1.length ? (nfts1.map( 
           (nft, index) =>
             !nft.isSold && (
               <Card
