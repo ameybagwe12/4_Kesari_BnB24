@@ -114,6 +114,7 @@ function App() {
                   player={player}
                   currentNft={currentNft}
                   setPlayer={setPlayer}
+                  setCurrentNft={setCurrentNft}
                 />
               }
             />
