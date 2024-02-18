@@ -4,11 +4,26 @@ import db from "../firebase.js";
 import key from "../key.json";
 import "./mintNFT.css";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import Web3 from 'web3';
+import contractData from '../contract.json'
 
 function MintNFT({ nfts, setNfts, connectedAccount }) {
   const [nftFile, setNftFile] = useState("");
   const [nftThumbnail, setNftThumbnail] = useState("");
   const [songId, setSongId] = useState(1);
+
+  const web3 = new Web3(window.ethereum); 
+  const contract = new web3.eth.Contract(contractData.contractABI, contractData.contractAddress);
+  contract.methods.addArtist().send({
+    from: connectedAccount, // Use the address that wants to become an artist
+    gas: 210000, // Adjust gas limit if needed
+  })
+  .then((tx) => {
+    console.log('Transaction hash:', tx.transactionHash);
+  })
+  .catch((error) => {
+    console.error('Error calling addArtist:', error);
+  });
 
   const handleUpload = async (e) => {
     e.preventDefault();

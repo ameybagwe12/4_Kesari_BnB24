@@ -117,6 +117,7 @@ function App() {
                   currentNft={currentNft}
                   setPlayer={setPlayer}
                   setCurrentNft={setCurrentNft}
+                  connectedAccount={connectedAccount}
                 />
               }
             />

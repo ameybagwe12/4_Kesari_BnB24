@@ -22,16 +22,16 @@ export default function SongTab({ nft }) {
     playerRef.current.seekTo(played);
   };
 
-  const handleSeek = (e) => {
-    setPlayed(parseFloat(e.target.value));
-    playerRef.current.seekTo(parseFloat(e.target.value));
-  };
+  // const handleSeek = (e) => {
+  //   setPlayed(parseFloat(e.target.value));
+  //   playerRef.current.seekTo(parseFloat(e.target.value));
+  // };
 
-  const handleProgress = (state) => {
-    if (!isPlaying) {
-      setPlayed(state.played);
-    }
-  };
+  // const handleProgress = (state) => {
+  //   if (!isPlaying) {
+  //     setPlayed(state.played);
+  //   }
+  // };
 
   const theme = useTheme();
   const [isPlaying, setIsPlaying] = React.useState(false);
@@ -108,18 +108,18 @@ export default function SongTab({ nft }) {
             width="0"
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
-            onProgress={handleProgress}
+            // onProgress={handleProgress}
           />
-          <input
+          {/* <input
             type="range"
             min={0}
             max={1}
             step="any"
             value={played}
-            onChange={handleSeek}
+            // onChange={handleSeek}
             style={{ width: "100%" }}
-          />
-          <button onClick={handlePlay}>Play from {played} second</button>
+          /> */}
+          {/* <button onClick={handlePlay}>Play from {played} second</button> */}
           <CardMedia
             component="img"
             sx={{ width: 151 }}

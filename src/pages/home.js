@@ -7,6 +7,8 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { purple } from "@mui/material/colors";
+import Web3 from 'web3';
+import contractData from '../contract.json'
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
@@ -24,7 +26,25 @@ function Home({
   currentNft,
   setPlayer,
   setCurrentNft,
+  connectedAccount,
 }) {
+  const handleClose = async => {
+    setPlayer(false); 
+    setCurrentNft(null);
+    const web3 = new Web3(window.ethereum); 
+    const contract = new web3.eth.Contract(contractData.contractABI, contractData.contractAddress);
+    contract.methods.playedSong(currentNft.nftOwner).send({
+      from: connectedAccount, // Use the same user address as before
+      gas: 210000, // Adjust gas limit if needed
+    })
+    .then((tx) => {
+      console.log('Transaction hash:', tx.transactionHash);
+    })
+    .catch((error) => {
+      console.error('Error calling playedSong:', error);
+    });
+    return
+  }
   console.log(`nfts is ${nfts1.length}`);
   return (
     <>
@@ -93,6 +113,7 @@ function Home({
                   onClick={() => {
                     setPlayer(false);
                     setCurrentNft(null);
+                    handleClose();
                   }}
                 >
                   Close

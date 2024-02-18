@@ -2,9 +2,15 @@ import React from 'react'
 // import AudioPlayerCard from './audioPlayer'
 import ReactAudioPlayer from 'react-audio-player';
 import './player.css'
+import contractData from '../contract.json'
+import Web3 from "web3";
 
 
 function Player({ nft, setPlayer, setCurrentNft }) {
+
+
+  
+
   return (
     <div className='player-div'>
       {/* {nft.mediaType === 'audio' ? <> */}

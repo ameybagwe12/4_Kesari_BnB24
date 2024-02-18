@@ -11,7 +11,7 @@ const Profile = () => {
   const [revenueCredits, setRevenueCredits] = useState(0);
   const [isArtist, setIsArtist] = useState(false);
   const [isUser, setIsUser] = useState(false);
-  const [contract, setContract] = useState(null);
+  // const [contract, setContract] = useState(null);
   
   // const [connectedAccount, setConnectedAccount] = useState("");
   const [userData, setUserData] = useState("");
@@ -54,8 +54,8 @@ const Profile = () => {
           // const accounts = await web3.eth.getAccounts();
           // setConnectedAccount(accounts[0]);
           console.log(connectedAccount); 
-
-          setContract(new web3.eth.Contract(contractData.contractABI, contractData.contractAddress))
+          const contract = new web3.eth.Contract(contractData.contractABI, contractData.contractAddress); 
+          // setContract(new web3.eth.Contract(contractData.contractABI, contractData.contractAddress))
 
           await contract.methods.users(connectedAccount).call()
           .then((userData) => {
@@ -87,7 +87,8 @@ const Profile = () => {
   // };
   const handleBuyTokens = async => {
     const tokens = document.getElementById('buy-tokens').value;
-
+    const web3 = new Web3(window.ethereum);
+    const contract = new web3.eth.Contract(contractData.contractABI, contractData.contractAddress); 
     contract.methods.buyCredits(tokens).send({
       from: connectedAccount,
       value: tokens * 100000000000000000, // Multiply tokens by conversion factor
