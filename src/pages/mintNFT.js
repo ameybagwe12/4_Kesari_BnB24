@@ -98,7 +98,7 @@ function MintNFT({ nfts, setNfts, connectedAccount }) {
   return (
     <div
       style={{
-        backgroundColor: "#f78259",
+        backgroundColor: "#C40BDB",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -108,7 +108,7 @@ function MintNFT({ nfts, setNfts, connectedAccount }) {
       <div
         className="card"
         style={{
-          backgroundColor: "#eb4559",
+          backgroundColor: "#F3235A",
           width: "500px",
           height: "600px",
           marginTop: 60,
