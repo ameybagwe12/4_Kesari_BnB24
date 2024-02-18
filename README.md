@@ -1,1 +1,1 @@
-Audio video player on ICP
+Decentralized Music Distribution Platform Empowering Artist
