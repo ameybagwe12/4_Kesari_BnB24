@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 backend/bin/linux/web3music.com
-backend/cred.json
+backend/*.json
