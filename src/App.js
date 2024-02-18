@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 import Web3 from "web3";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar";
@@ -23,8 +23,8 @@ function App() {
     const fetchData = async () => {
       const db = firebase.firestore();
       const data = await db.collection("music").get();
-      setNfts1(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-      console.log(nfts1)
+      setNfts1(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(nfts1);
     };
     fetchData();
   }, []);
@@ -99,51 +99,38 @@ function App() {
 
   return (
     <>
-    <Router>
-      <div className="App">
-        <Navbar connectedAccount={connectedAccount} player={player} />
-        {player && (
-          <SongTab nft={currentNft} setPlayer={setPlayer} className='m-4'/>
-        )}
-        <Routes>
-          <Route
-          path="/home"
-            element={
-              <Home
-                nfts={nfts}
-             
-                nfts1 = {nfts1 }
-                handlePayment={handlePayment}
-                player={player}
-              />
-            }
-          />
-          <Route
-            path="/mintNFT"
-            element={
-              <MintNFT
-                nfts={nfts}
-                setNfts={setNfts}
-                connectedAccount={connectedAccount}
-              />
-              
-            }
-          />
-
-          <Route
-          path="/"
-          element={
-            <LandPage
-            
+      <Router>
+        <div className="App">
+          <Navbar connectedAccount={connectedAccount} player={player} />
+          <Routes>
+            <Route
+              path="/home"
+              element={
+                <Home
+                  nfts={nfts}
+                  nfts1={nfts1}
+                  handlePayment={handlePayment}
+                  player={player}
+                  currentNft={currentNft}
+                  setPlayer={setPlayer}
+                />
+              }
             />
-            
-          }
-        />
-         
-        
-        </Routes>
-      </div>
-    </Router>
+            <Route
+              path="/mintNFT"
+              element={
+                <MintNFT
+                  nfts={nfts}
+                  setNfts={setNfts}
+                  connectedAccount={connectedAccount}
+                />
+              }
+            />
+
+            <Route path="/" element={<LandPage />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }

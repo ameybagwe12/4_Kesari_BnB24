@@ -34,14 +34,14 @@ export default function SongTab({ nft, setPlayer }) {
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Typography component="div" variant="h5">
-                Live From Space
+                {nft.nftName}
               </Typography>
               <Typography
                 variant="subtitle1"
                 color="text.secondary"
                 component="div"
               >
-                Mac Miller
+                {nft.nftDescription}
               </Typography>
             </CardContent>
             <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
@@ -79,8 +79,8 @@ export default function SongTab({ nft, setPlayer }) {
           <CardMedia
             component="img"
             sx={{ width: 151 }}
-            src={nft.thumUrl}
-            alt="Live from space album cover"
+            src={nft.thumbnailUrl}
+            alt={nft.nftName}
           />
         </Card>
       </div>

@@ -112,7 +112,7 @@ function MintNFT({ nfts, setNfts, connectedAccount }) {
           width: "500px",
           height: "600px",
           marginTop: 60,
-          marginLeft: 40,
+          marginLeft: 100,
         }}
       >
         <div className="card-body">
