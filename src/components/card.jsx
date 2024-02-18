@@ -15,7 +15,7 @@ function Card({ nft, handlePayment, player }) {
         //     </div>
         // </div>
         <div className="card">
-            <img src={nft.thumUrl} class="card-img-top" alt={nft.nftName}/>
+            <img src={nft.thumbnailUrl} class="card-img-top" alt={nft.nftName}/>
             <div class="card-body">
                 <h5 class="card-title">{nft.nftName}</h5>
                 <p class="card-text">{nft.nftDescription}</p>
