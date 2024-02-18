@@ -105,19 +105,14 @@ const Profile = ({connectedAccount}) => {
 
   return (
     <div>
-      <h1>Profile</h1>
-      <p>Account Address: {connectedAccount}</p>
-      <p>Spending Credits: {spendingCredits}</p>
-      
-      {isArtist && (
-        <button onClick={handleShowRevenueCredits}>
-          Show Revenue Credits
-        </button>
-      )}
-
-      {isArtist && revenueCredits > 0 && (
-        <p>Revenue Credits: {revenueCredits}</p>
-      )}
+       <h1>Profile</h1>
+      {connectedAccount && <>
+        <p>Account Address: {connectedAccount}</p>
+        <p>Spending Credits: {Number(spendingCredits)}</p>
+        <p>Revenue Credits: {Number(revenueCredits)}</p>
+        <input type='number' min={1} id='buy-tokens'/>
+        <button onClick={handleBuyTokens}> Buy tokens </button>
+      </>}
     </div>
   );
 };
