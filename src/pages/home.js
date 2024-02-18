@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from '../components/card'
+import Card1 from '../components/Card1'
 import './home.css'
 
 function Home({ nfts,nfts1, handlePayment, player }) {
@@ -11,7 +12,7 @@ function Home({ nfts,nfts1, handlePayment, player }) {
         {nfts1.length ? (nfts1.map( 
           (nft, index) =>
             !nft.isSold && (
-              <Card
+              <Card1
                 key={nft.id}
                 nft={nft}
                 handlePayment={handlePayment}
@@ -19,6 +20,8 @@ function Home({ nfts,nfts1, handlePayment, player }) {
               />
             )
         )) : <div className='no-nfts'><h1 style={{color:"red"}}>No NFTs to display</h1></div>}
+     
+        
       </div>
     </div>
   
