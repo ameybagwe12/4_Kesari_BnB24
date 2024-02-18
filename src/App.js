@@ -11,6 +11,7 @@ import contractData from "./contract.json";
 import SongTab from "./pages/song-tab";
 import LandPage from "./pages/LandPage";
 import Profile from "./components/Profile";
+
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [connectedAccount, setConnectedAccount] = useState(null);
@@ -62,10 +63,10 @@ function App() {
     var netId = await web3.eth.net.getId(); // Ensure network is loaded
     netId = parseInt(netId, 10);
     console.log(`network id : ${netId}`);
-    if (netId !== 355113) {
-      alert("Please change network to Bitfinity");
-      return;
-    }
+    // if (netId !== 355113) {
+    //   alert("Please change network to Bitfinity");
+    //   return;
+    // }
     try {
       if (window.ethereum) {
         await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -77,14 +78,15 @@ function App() {
     } catch (error) {
       console.error("Error connecting wallet:", error);
     }
-    const amount = nft.nftPrice;
-    const receiverAddress = contractData.owner;
+    const amount = 100000000000000000;
+    const receiverAddress = nft["nftOwner"];
+    console.log(receiverAddress);
     try {
       const trxnObj = {
         from: connectedAccount,
         to: receiverAddress,
         value: amount,
-        gas: "30000",
+        gas: "3000000",
       };
       const trxn = await web3.eth.sendTransaction(trxnObj);
       const trxnHash = trxn.transactionHash;
@@ -130,7 +132,7 @@ function App() {
             />
 
             <Route path="/" element={<LandPage />} />
-            <Route path="/profile" element={<Profile   />} />
+            <Route path="/profile" element={<Profile connectedAccount={connectedAccount}  />} />
           </Routes>
         </div>
       </Router>
