@@ -3,8 +3,28 @@ import Card1 from "../components/Card1";
 import SongTab from "./song-tab";
 import "./home.css";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { purple } from "@mui/material/colors";
 
-function Home({ nfts, nfts1, handlePayment, player, currentNft, setPlayer }) {
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: purple[500],
+  "&:hover": {
+    backgroundColor: purple[700],
+  },
+}));
+
+function Home({
+  nfts,
+  nfts1,
+  handlePayment,
+  player,
+  currentNft,
+  setPlayer,
+  setCurrentNft,
+}) {
   console.log(`nfts is ${nfts1.length}`);
   return (
     <>
@@ -49,7 +69,12 @@ function Home({ nfts, nfts1, handlePayment, player, currentNft, setPlayer }) {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-around",
-                height: 800,
+                alignItems: "center",
+                height: 300,
+                backgroundColor: "black",
+                borderRadius: 20,
+                marginTop: 10,
+                marginLeft: 35,
               }}
             >
               <div>
@@ -61,6 +86,17 @@ function Home({ nfts, nfts1, handlePayment, player, currentNft, setPlayer }) {
                 >
                   <Controls />
                 </Player>
+              </div>
+              <div className="mt-5">
+                <ColorButton
+                  variant="contained"
+                  onClick={() => {
+                    setPlayer(false);
+                    setCurrentNft(null);
+                  }}
+                >
+                  Close
+                </ColorButton>
               </div>
               <div style={{ marginTop: 50 }}>
                 <SongTab
