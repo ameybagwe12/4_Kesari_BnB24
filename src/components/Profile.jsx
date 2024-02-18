@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import Web3 from "web3";
 import contractData from "../contract.json";
 
+import './Profile.css'; 
 
 const Profile = ({connectedAccount}) => {
-import './Profile.css'; 
-const Profile = () => {
+
   const [spendingCredits, setSpendingCredits] = useState(0);
   const [revenueCredits, setRevenueCredits] = useState(0);
   const [isArtist, setIsArtist] = useState(false);
