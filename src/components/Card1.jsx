@@ -42,11 +42,7 @@ export default function Card1({ nft, handlePayment, player }) {
   return (
     <Card sx={{ maxWidth: 345 }} style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)',width:"243px",marginLeft:"40px",marginTop:"30px"}}>
       <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        
         title={nft.nftName}
         subheader="September 14, 2016"
       />
