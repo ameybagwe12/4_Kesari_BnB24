@@ -39,6 +39,9 @@ function Navbar({ player }) {
             <h1
               style={{
                 color: "white",
+                fontFamily: "Protest Riot",
+                fontWeight: 400,
+                fontStyle: "normal",
               }}
             >
               Spoti.Fi
@@ -55,7 +58,7 @@ function Navbar({ player }) {
             aria-expanded="false"
             aria-controls="collapseExample"
           >
-            Connected Account :{" "}
+            Connected Account{" "}
             {connectedAccount && (
               <div class="collapse" id="collapseExample">
                 <p color="#DAF7A6">{connectedAccount}</p>
