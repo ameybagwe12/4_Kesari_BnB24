@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+.verify-parent-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    left: 10%;
+    position: relative;
+    margin-top: 18px;
+    justify-content: space-between;
+   
+    
+}
+.verify-a, .verify-b{
+
+    width: 47%;
+    height:400px;
+    background-color: #4B0082;
+    box-shadow: 15px 14px 10px #0000008c;
+    border: 20px solid transparent;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+}
+
+@keyframes borderAnimation {
+    0% {
+      box-shadow: 0 0 3px red;
+    }
+  
+    50% {
+      box-shadow: 0 0 18px red;
+    }
+  
+    100% {
+      box-shadow: 0 0 3px red;
+    }
+  }
+
+  .h-style {
+    font-size: 3.5rem;
+    color: #fff;
+    position: relative;
+    
+    text-align: center;
+  }
+
+  .certificate-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Oswald'
+  }
+  .p-animate {
+    font-size: 2.5rem;
+    color: #222;
+    color: #fff;
+    position: absolute;
+
+    top: 143px;
+  }
+
+  .p-status b{
+    font-family: "Oswald";
+    font-weight: 50;
+  }
+
+  .p-status {
+    font-size: 130%;
+    color: whitesmoke;
+    width:50%;
+  
+    text-align: left;
+    height: 99px;
+    text-align: center;
+    position: absolute;
+    top: 125px;
+    font-family: 'PlayFair';
+  }

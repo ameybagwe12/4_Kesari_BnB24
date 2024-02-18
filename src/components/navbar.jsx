@@ -90,6 +90,17 @@ function Navbar({ player }) {
               </button>
             </NavLink>
           )}
+          {!player && (
+            <NavLink to="profile">
+              <button
+                style={{ color: "#DAF7A6" }}
+                class="btn m-2"
+                type="button"
+              >
+                Profile
+              </button>
+            </NavLink>
+          )}
         </form>
       </div>
     </nav>
