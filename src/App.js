@@ -10,6 +10,7 @@ import MintNFT from "./pages/mintNFT";
 import contractData from "./contract.json";
 import SongTab from "./pages/song-tab";
 import LandPage from "./pages/LandPage";
+import Profile from "./components/Profile";
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [connectedAccount, setConnectedAccount] = useState(null);
@@ -128,6 +129,7 @@ function App() {
             />
 
             <Route path="/" element={<LandPage />} />
+            <Route path="/profile" element={<Profile   />} />
           </Routes>
         </div>
       </Router>

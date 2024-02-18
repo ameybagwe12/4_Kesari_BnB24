@@ -24,6 +24,7 @@ function Navbar({ player }) {
       console.error("Error connecting wallet:", error);
     }
   }
+  
 
   return (
     <nav style={{ backgroundColor: "#581845", height: 100 }} class="navbar ">
