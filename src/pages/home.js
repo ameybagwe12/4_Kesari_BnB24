@@ -5,6 +5,7 @@ import './home.css'
 function Home({ nfts,nfts1, handlePayment, player }) {
   console.log(`nfts is ${nfts1.length}`)
   return (
+ 
     <div className='home'>
       <div className="nft-list">
         {nfts1.length ? (nfts1.map( 
@@ -17,9 +18,10 @@ function Home({ nfts,nfts1, handlePayment, player }) {
                 player={player}
               />
             )
-        )) : <div className='no-nfts'><h1>No NFTs to display</h1></div>}
+        )) : <div className='no-nfts'><h1 style={{color:"red"}}>No NFTs to display</h1></div>}
       </div>
     </div>
+  
   )
 }
 

@@ -9,7 +9,7 @@ import Home from "./pages/home";
 import MintNFT from "./pages/mintNFT";
 import contractData from "./contract.json";
 import SongTab from "./pages/song-tab";
-
+import LandPage from "./pages/LandPage";
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [connectedAccount, setConnectedAccount] = useState(null);
@@ -107,10 +107,11 @@ function App() {
         )}
         <Routes>
           <Route
-            index
+          path="/home"
             element={
               <Home
                 nfts={nfts}
+             
                 nfts1 = {nfts1 }
                 handlePayment={handlePayment}
                 player={player}
@@ -125,8 +126,20 @@ function App() {
                 setNfts={setNfts}
                 connectedAccount={connectedAccount}
               />
+              
             }
           />
+
+          <Route
+          path="/"
+          element={
+            <LandPage
+            
+            />
+            
+          }
+        />
+         
         
         </Routes>
       </div>
