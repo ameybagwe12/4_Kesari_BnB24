@@ -8,9 +8,11 @@ const Profile = ({connectedAccount}) => {
   const [spendingCredits, setSpendingCredits] = useState(0);
   const [revenueCredits, setRevenueCredits] = useState(0);
   const [isArtist, setIsArtist] = useState(false);
+  const [isUser, setIsUser] = useState(false);
+  const [contract, setContract] = useState(null);
   
   // const [connectedAccount, setConnectedAccount] = useState("");
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState("");
   useEffect(() => {
     console.log("in useeffect",userData);
     // const userDataComponent = (<>
@@ -51,13 +53,17 @@ const Profile = ({connectedAccount}) => {
           // setConnectedAccount(accounts[0]);
           console.log(connectedAccount); 
 
-          const contract = new web3.eth.Contract(contractData.contractABI, contractData.contractAddress);
+          setContract(new web3.eth.Contract(contractData.contractABI, contractData.contractAddress))
 
           await contract.methods.users(connectedAccount).call()
           .then((userData) => {
             setUserData(userData);
             // setSpendingCredits(userData.spendingCredits);
-            console.log(userData[2]); // This will contain the User object for the given address
+            console.log(".......VSl "+userData[3]); // This will contain the User object for the given address
+            setIsUser(userData[0]);
+            setIsArtist(userData[1]);
+            setSpendingCredits(userData[2]);
+            setRevenueCredits(userData[3]);
           })
           .catch((error) => {
             console.error('Error retrieving user data:', error);
@@ -77,6 +83,22 @@ const Profile = ({connectedAccount}) => {
   //   const revenueCreditsForArtist = userData.revenueCredits;
   //   setRevenueCredits(revenueCreditsForArtist);
   // };
+  const handleBuyTokens = async => {
+    const tokens = document.getElementById('buy-tokens').value;
+
+    contract.methods.buyCredits(tokens).send({
+      from: connectedAccount,
+      value: tokens * 100000000000000000, // Multiply tokens by conversion factor
+      gas: 300000, // Adjust gas limit as needed
+    })
+    .then((tx) => {
+      console.log('Transaction hash:', tx.transactionHash);
+    })
+    .catch((error) => {
+      console.error('Error calling buyCredits:', error);
+    });
+    console.log(userData);
+  }  
 
   return (
     // <></>
@@ -84,7 +106,10 @@ const Profile = ({connectedAccount}) => {
       <h1>Profile</h1>
       {connectedAccount && <>
         <p>Account Address: {connectedAccount}</p>
-        {/* <p>Spending Credits: {Number(userData[2])}</p> */}
+        <p>Spending Credits: {Number(spendingCredits)}</p>
+        <p>Revenue Credits: {Number(revenueCredits)}</p>
+        <input type='number' min={1} id='buy-tokens'/>
+        <button onClick={handleBuyTokens}> Buy tokens </button>
       </>}
       {/* <p>Revenue Credits: {Number(userData[3])}</p> */}
       {/* <p>Spending Credits: {spendingCredits ? spendingCredits : 0 }</p> */}
