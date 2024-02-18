@@ -5,27 +5,49 @@ import './home.css'
 
 function Home({ nfts,nfts1, handlePayment, player }) {
   console.log(`nfts is ${nfts1.length}`)
-  return (
- 
-    <div className='home'>
-      <div className="nft-list">
-        {nfts1.length ? (nfts1.map( 
-          (nft, index) =>
-            !nft.isSold && (
-              <Card1
-                key={nft.id}
-                nft={nft}
-                handlePayment={handlePayment}
-                player={player}
-              />
-            )
-        )) : <div className='no-nfts'><h1 style={{color:"red"}}>No NFTs to display</h1></div>}
-     
-        
-      </div>
+  return (<>
+    <div className='animated-div'   >
+    <div className='box'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      
     </div>
+   
+    <div className='home'>
+    <div className='nft-list'>
+      {nfts1.length ? (
+        <div className='card-container'>
+          {nfts1.map(
+            (nft, index) =>
+              !nft.isSold && (
+                <Card1
+                  key={nft.id}
+                  nft={nft}
+                  handlePayment={handlePayment}
+                  player={player}
+                />
+              )
+          )}
+        </div>
+      ) : (
+        <div className='no-nfts'>
+          <h1 style={{ color: 'red' }}>No NFTs to display</h1>
+        </div>
+      )}
+    </div>
+  </div>
+
+
+  </div>
   
-  )
+  </>)
 }
 
 export default Home

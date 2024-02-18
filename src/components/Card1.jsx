@@ -40,7 +40,7 @@ export default function Card1({ nft, handlePayment, player }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }} style={{width:"243px"}}>
+    <Card sx={{ maxWidth: 345 }} style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)',width:"243px",marginLeft:"40px",marginTop:"30px"}}>
       <CardHeader
         action={
           <IconButton aria-label="settings">
@@ -56,6 +56,10 @@ export default function Card1({ nft, handlePayment, player }) {
           height="194"
           image={nft.thumbnailUrl}
           alt={nft.nftName}
+          style={{marginLeft: "6%",
+            borderRadius: "50%",
+            width: "86%"
+        }}
         />
         {hover && (
           <div style={{
