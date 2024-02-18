@@ -108,11 +108,13 @@ function MintNFT({ nfts, setNfts, connectedAccount }) {
       <div
         className="card"
         style={{
-          backgroundColor: "#F3235A",
+          backgroundColor: "#F493A8",
           width: "500px",
           height: "600px",
           marginTop: 60,
           marginLeft: 100,
+          borderColor: "white",
+          borderWidth: 2,
         }}
       >
         <div className="card-body">
